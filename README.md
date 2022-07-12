@@ -1,3 +1,14 @@
+# NFT token creation
+
+-- from harhat boilerplate --
+
+NFT project which:
+
+- connects a user's metamask wallet to the application
+- allows users to mint an NFT, randomly determined through the Chainlink oracle (users do not know which part of the plot they are getting)
+- mints only 1 iterration of an NFT - unique NFTs
+- each NFT gives ownership of a 10\*10sq of a plot of land on Mars
+
 # Hardhat Boilerplate
 
 This repository contains a sample project that you can use as the starting point

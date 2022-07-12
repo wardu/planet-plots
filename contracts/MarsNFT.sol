@@ -16,7 +16,8 @@ pragma solidity ^0.8.9;
 
 contract MarsNFT {
 //When we mint an NFT, we will trigger a Chainlink VRF Call to get a random number
-//This random number will be determining which
+//This random number will be determining which plot will be sold
 
-
+//users have to pay to mint an NFT
+// the owner of the marsian land can withdraw the ETH sent to this contract
 }
