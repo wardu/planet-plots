@@ -1,32 +1,41 @@
-# NFT token creation
+# Planet Plots - putting Mars on the Blockchain
 
--- from harhat boilerplate --
+Project uses:    
+<img src='https://api.iconify.design/vscode-icons/file-type-reactjs.svg?color=%23555?width=30&height=30'> ReactJS     
+<img src='https://api.iconify.design/simple-icons/solidity.svg?color=%23555?width=30&height=30'> Solidity     
+<img src='https://api.iconify.design/simple-icons/chainlink.svg?width=30&height=30'> Chainlink
 
-NFT project which:
 
-- connects a user's metamask wallet to the application
-- allows users to mint an NFT, randomly determined through the Chainlink oracle (users do not know which part of the plot they are getting)
-- mints only 1 iterration of an NFT - unique NFTs
-- each NFT gives ownership of a 10\*10sq of a plot of land on Mars
+<br />
 
-# Hardhat Boilerplate
 
-This repository contains a sample project that you can use as the starting point
-for your Ethereum project. It's also a great fit for learning the basics of
-smart contract development.
+## Planet Plots is a decentralised application (dApp) that allows users to:
 
-This project is intended to be used with the
-[Hardhat Beginners Tutorial](https://hardhat.org/tutorial), but you should be
-able to follow it by yourself by reading the README and exploring its
-`contracts`, `tests`, `scripts` and `frontend` directories.
+- connect their Metamask wallet via the dApp front-end
+- mint an NFT that represents a unique plot of land on Mars
+- view their plot and ownership certificate
+<br />
 
-## Quick start
+Planet Plots utilises the Chainlink VRF to bring randomness to the minting process (minters won't know which plot they will receive).
+Each NFT represents an ownership certificate of a 10m * 10m plot of land on Mars - however, as this is only a 'proof-of-concept' project, the owner of the NFT will *probably* not have a real claim to actual land on Mars ;)
+
+
+<br />
+<br />
+<br />
+
+
+## Hardhat Boilerplate
+
+More information can be found in Hardhat's boilerplate README: https://github.com/NomicFoundation/hardhat-boilerplate
+
+### Quick start   (edit from Hardhat)
 
 The first things you need to do are cloning this repository and installing its
 dependencies:
 
 ```sh
-git clone https://github.com/NomicFoundation/hardhat-boilerplate.git
+git clone https://github.com/wardu/planet-plots.git
 cd hardhat-boilerplate
 npm install
 ```
@@ -52,50 +61,6 @@ npm install
 npm start
 ```
 
-Open [http://localhost:3000/](http://localhost:3000/) to see your Dapp. You will
+Open [http://localhost:3000/](http://localhost:3000/) to see the Dapp. You will
 need to have [Metamask](https://metamask.io) installed and listening to
 `localhost 8545`.
-
-## User Guide
-
-You can find detailed instructions on using this repository and many tips in [its documentation](https://hardhat.org/tutorial).
-
-- [Writing and compiling contracts](https://hardhat.org/tutorial/writing-and-compiling-contracts/)
-- [Setting up the environment](https://hardhat.org/tutorial/setting-up-the-environment/)
-- [Testing Contracts](https://hardhat.org/tutorial/testing-contracts/)
-- [Setting up Metamask](https://hardhat.org/tutorial/boilerplate-project#how-to-use-it)
-- [Hardhat's full documentation](https://hardhat.org/docs/)
-
-For a complete introduction to Hardhat, refer to [this guide](https://hardhat.org/getting-started/#overview).
-
-## What's Included?
-
-This repository uses our recommended hardhat setup, by using our [`@nomicfoundation/hardhat-toolbox`](https://hardhat.org/hardhat-runner/plugins/nomicfoundation-hardhat-toolbox). When you use this plugin, you'll be able to:
-
-- Deploy and interact with your contracts using [ethers.js](https://docs.ethers.io/v5/) and the [`hardhat-ethers`](https://hardhat.org/hardhat-runner/plugins/nomiclabs-hardhat-ethers) plugin.
-- Test your contracts with [Mocha](https://mochajs.org/), [Chai](https://chaijs.com/) and our own [Hardhat Chai Matchers](https://hardhat.org/hardhat-chai-matchers) plugin.
-- Interact with Hardhat Network with our [Hardhat Network Helpers](https://hardhat.org/hardhat-network-helpers).
-- Verify the source code of your contracts with the [hardhat-etherscan](https://hardhat.org/hardhat-runner/plugins/nomiclabs-hardhat-etherscan) plugin.
-- Get metrics on the gas used by your contracts with the [hardhat-gas-reporter](https://github.com/cgewecke/hardhat-gas-reporter) plugin.
-- Measure your tests coverage with [solidity-coverage](https://github.com/sc-forks/solidity-coverage).
-
-This project also includes [a sample frontend/Dapp](./frontend), which uses [Create React App](https://github.com/facebook/create-react-app).
-
-## Troubleshooting
-
-- `Invalid nonce` errors: if you are seeing this error on the `npx hardhat node`
-  console, try resetting your Metamask account. This will reset the account's
-  transaction history and also the nonce. Open Metamask, click on your account
-  followed by `Settings > Advanced > Reset Account`.
-
-## Setting up your editor
-
-[Hardhat for Visual Studio Code](https://hardhat.org/hardhat-vscode) is the official Hardhat extension that adds advanced support for Solidity to VSCode. If you use Visual Studio Code, give it a try!
-
-## Getting help and updates
-
-If you need help with this project, or with Hardhat in general, please read [this guide](https://hardhat.org/hardhat-runner/docs/guides/getting-help) to learn where and how to get it.
-
-For the latest news about Hardhat, [follow us on Twitter](https://twitter.com/HardhatHQ), and don't forget to star [our GitHub repository](https://github.com/NomicFoundation/hardhat)!
-
-**Happy _building_!**
