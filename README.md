@@ -11,7 +11,7 @@ Project uses:
 
 ## Planet Plots is a decentralised application (dApp) that allows users to:
 
-- connect their Metamask wallet via the dApp front-end
+- connect their Metamask wallet via the dApp's front-end
 - mint an NFT that represents a unique plot of land on Mars
 - view their plot and ownership certificate
 <br />
