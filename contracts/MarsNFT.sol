@@ -12,21 +12,33 @@ pragma solidity ^0.8.9;
 // the original owner of the land can withdraw the ETH sent to this contract
 
 import "../node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol";
-// import "../node_modules/@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
-// import "../node_modules/@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
+import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
+import "../node_modules/@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
+import "../node_modules/@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
 // import "hardhat/console.sol";
 
 
 
-contract MarsNFT is ERC721 {
+contract MarsNFT is ERC721, Ownable {
 
-    address public owner; //the address deploying the contract
+    //Contract's variables
     uint256 private _tokenId; //the unique tokenID of the NFT deployed
+    uint256 private nftFee;//price expected to be paid to mint one NFT Plot On Mars
+
     mapping(address => uint256) private _ownerToId; //link each NFT to their owner
+
+    error NeedMoreEth(); //throws if the address minting the NFT does not send the correct nftFee
+
+    event NftRequested(uint256 indexed requestId, address requester);//will emit to inform of the request
+    //to get a random number, will call fulfillRandomWords from VRF
     
     constructor() ERC721("PlotOnMars", "POM"){
-        owner = msg.sender;
     }
+
+    function withdraw() public onlyOwner {
+    } //only the owner of the contract can withdraw the ETH paid for the NFTs
+
+
 
 
     // function requestNft() public returns (uint256 requestId) {}
