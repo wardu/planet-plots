@@ -20,7 +20,11 @@ import "../node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 contract MarsNFT is ERC721 {
 
-    constructor() ERC721("PlotOnMars", "POM"){}
+    address public owner;
+    
+    constructor() ERC721("PlotOnMars", "POM"){
+        owner = msg.sender;
+    }
 
 
     // function requestNft() public returns (uint256 requestId) {}
