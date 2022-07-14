@@ -1,4 +1,4 @@
-const { expect } = require("chai");
+const { expect, assert } = require("chai");
 const { ethers } = require("hardhat");
 const { loadFixture } = require("@nomicfoundation/hardhat-network-helpers");
 // `describe` receives the name of a section of our test suite, and a callback. 
@@ -10,9 +10,7 @@ describe("Plot On Mars contract", function () {
       const token = await ethers.getContractFactory("MarsNFT");
       const [owner, addr1, addr2] = await ethers.getSigners();
       const marsToken = await token.deploy();
-  
       await marsToken.deployed();
-  
       return { token, marsToken, owner, addr1, addr2 };
     }
 
@@ -22,7 +20,7 @@ describe("Plot On Mars contract", function () {
         let _symbol='POM';
         it("Should set the right owner", async function () {
           // We use loadFixture to setup our environment, get the deployer's address
-          // and get the 
+          // and get the variables marsToken and owner, both addresses
           const { marsToken, owner } = await loadFixture(deployTokenFixture);
           expect(await marsToken.owner()).to.equal(owner.address);
         }); // passed correctly 14.07.22 - 13h52
