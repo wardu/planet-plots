@@ -36,7 +36,7 @@ contract MarsNFT is ERC721, Ownable, VRFConsumerBaseV2 {
     mapping(uint256 => address) public s_requestIdToSender;
 
    // Contract's Variables
-    uint256 private nftFee;
+    uint256 private i_nftFee;
     uint256 public s_tokenCounter;
     uint256 internal constant MAX_CHANCE_VALUE = 100;
     string[] internal s_plotTokenUris;
@@ -61,7 +61,7 @@ contract MarsNFT is ERC721, Ownable, VRFConsumerBaseV2 {
             i_vrfCoordinator = VRFCoordinatorV2Interface(vrfCoordinatorV2);
             i_gasLane = gasLane;
             i_subscriptionId = subscriptionId;
-            nftFee = mintFee;
+            i_nftFee = mintFee;
             i_callbackGasLimit = callbackGasLimit;
     }
 
@@ -70,7 +70,17 @@ contract MarsNFT is ERC721, Ownable, VRFConsumerBaseV2 {
 
     function fulfillRandomWords(uint256 requestId, uint256[] memory randomWords) internal override {}
 
-    function withdraw() public onlyOwner {
+    function setMintFee(uint256 newMintFee) private onlyOwner returns(uint256){
+        //requires additional security
+        return i_nftFee = newMintFee;
+    }
+
+    function withdraw() private onlyOwner {
     } //only the owner of the contract can withdraw the ETH paid for the NFTs
+
+
+    function getMintFee() public view returns (uint256) {
+        return i_nftFee;
+    }
  
 }
