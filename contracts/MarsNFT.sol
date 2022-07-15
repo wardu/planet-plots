@@ -48,7 +48,10 @@ contract MarsNFT is ERC721, Ownable, VRFConsumerBaseV2 {
     error NeedMoreEth(); 
     
     //will emit to inform of the request and index the id and address
-    event NftRequested(uint256 indexed requestId, address indexed requester);
+    event NftRequested(uint256 indexed requestId);
+
+    enum NFTCollection {nft1, nft2, nft3, nft4, nft5, nft16, nft17, nft18, nft19, nft10 }
+
 
     constructor(
         address vrfCoordinatorV2,
@@ -65,10 +68,26 @@ contract MarsNFT is ERC721, Ownable, VRFConsumerBaseV2 {
             i_callbackGasLimit = callbackGasLimit;
     }
 
-    // function requestNft() public returns (uint256 requestId) {}
-    // // from VRFCoordinator, returns the requestID to fulfill random Words
 
-    function fulfillRandomWords(uint256 requestId, uint256[] memory randomWords) internal override {}
+    // function mintNft() external {} 
+
+    function requestNft() external {
+        uint256 requestId = i_vrfCoordinator.requestRandomWords(
+            i_gasLane,
+            i_subscriptionId,
+            REQUEST_CONFIRMATIONS,
+            i_callbackGasLimit,
+            NUM_WORDS
+        );
+        emit NftRequested(requestId);
+    }
+
+    function fulfillRandomWords(uint256 requestId, uint256[] memory randomWords) internal override {
+        // will use the random words (aka random number) to pick from an array of NFTs pre-determined
+        //enum size plots/NFT = 10
+        // randomNumber % 10 will give us a number between 0 and 9
+        // which will be used to select the index of the NFT within the enum
+    }
 
     function setMintFee(uint256 newMintFee) private onlyOwner returns(uint256){
         //requires additional security
