@@ -43,7 +43,7 @@ contract MarsNFT is ERC721, Ownable, VRFConsumerBaseV2 {
     mapping(address => uint256) private _ownerToId; //link each NFT to their owner
     error NeedMoreEth(); //throws if the address minting the NFT does not send the correct nftFee
     event NftRequested(uint256 indexed requestId, address requester);//will emit to inform of the request
-    //to get a random number, will call fulfillRandomWords from VRF
+    //to get a random number, will call fulfillRandomWords from VRF, we index it because we want to be able to look it up
     
 
     constructor(
