@@ -101,7 +101,7 @@ export class Dapp extends React.Component {
               <b>
                 {this.state.balance.toString()} {this.state.tokenData.symbol}
               </b>
-              .
+              You have the possibility to own a piece of Mars.
             </p>
           </div>
         </div>
