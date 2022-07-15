@@ -73,7 +73,7 @@ contract MarsNFT is ERC721, Ownable, VRFConsumerBaseV2 {
     function setMintFee(uint256 newMintFee) private onlyOwner returns(uint256){
         //requires additional security
         return i_nftFee = newMintFee;
-    }
+    } // the owner of the contract has the freedom to modify the mintFee 
 
     function withdraw() private onlyOwner {
     } //only the owner of the contract can withdraw the ETH paid for the NFTs
