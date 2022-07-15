@@ -38,13 +38,19 @@ contract MarsNFT is ERC721, Ownable, VRFConsumerBaseV2 {
     uint256 internal constant MAX_CHANCE_VALUE = 100;
     string[] internal s_plotTokenUris;
     bool private s_initialized;
+
     //Contract's variables
-    uint256 private _tokenId; //the unique tokenID of the NFT deployed
-    mapping(address => uint256) private _ownerToId; //link each NFT to their owner
-    error NeedMoreEth(); //throws if the address minting the NFT does not send the correct nftFee
-    event NftRequested(uint256 indexed requestId, address requester);//will emit to inform of the request
-    //to get a random number, will call fulfillRandomWords from VRF, we index it because we want to be able to look it up
+    //the unique tokenID of the NFT deployed
+    uint256 private _tokenId; 
     
+    //link each NFT to their owner
+    mapping(address => uint256) private _ownerToId; 
+    
+    //throws if the address minting the NFT does not send the correct nftFee
+    error NeedMoreEth(); 
+    
+    //will emit to inform of the request and index the id and address
+    event NftRequested(uint256 indexed requestId, address indexed requester);
 
     constructor(
         address vrfCoordinatorV2,
