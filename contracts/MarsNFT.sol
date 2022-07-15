@@ -24,27 +24,25 @@ contract MarsNFT is ERC721, Ownable, VRFConsumerBaseV2 {
 
     VRFCoordinatorV2Interface private immutable i_vrfCoordinator;
     uint64 private immutable i_subscriptionId;
-    bytes32 private immutable i_gasLane;
-    uint32 private immutable i_callbackGasLimit;
+    bytes32 private immutable i_gasLane; //keyhash for the maximum gas price
+    uint32 private immutable i_callbackGasLimit;// Depends on the number of requested values that you want sent to the
+  // fulfillRandomWords() function. Storing each word costs about 20,000 gas. Test and adjust
+  // this limit based on the network that you select, the size of the request,
+  // and the processing of the callback request in the fulfillRandomWords() function.
     uint16 private constant REQUEST_CONFIRMATIONS = 3;
-    uint32 private constant NUM_WORDS = 1;
+    uint32 private constant NUM_WORDS = 1; //we want to retrieve 1 random word every time 
 
     // VRF Helpers
     mapping(uint256 => address) public s_requestIdToSender;
 
-   // NFT Variables
-    uint256 private nftFee;//price expected to be paid to mint one NFT Plot On Mars
+   // Contract's Variables
+    uint256 private nftFee;
     uint256 public s_tokenCounter;
     uint256 internal constant MAX_CHANCE_VALUE = 100;
     string[] internal s_plotTokenUris;
     bool private s_initialized;
-
-    //Contract's variables
-    //the unique tokenID of the NFT deployed
     uint256 private _tokenId; 
-    
-    //link each NFT to their owner
-    mapping(address => uint256) private _ownerToId; 
+    mapping(address => uint256) private _ownerToId; //link each NFT to their owner
     
     //throws if the address minting the NFT does not send the correct nftFee
     error NeedMoreEth(); 
