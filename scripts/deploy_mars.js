@@ -1,7 +1,10 @@
 //const path = require("path")
 
+const { networkConfig } = require("../helper-hardhat-config")
+const {network, ethers} = require("hardhat");
 
-vrfCoordinatorV2 =
+
+const vrfCoordinatorV2 = networkConfig[chaindIf]["vrfCoordinatorV2"]
 
 async function main() {
     // first, we get the address who will deploy the contract
@@ -13,8 +16,8 @@ async function main() {
     );
     
     //then we deploy the contract
-    const Mars = await ethers.getContractFactory("MarsNFT");
-    const marsToken = await Mars.deploy();
+    const marsFactory = await ethers.getContractFactory("MarsNFT");
+    const marsToken = await marsFactory.deploy();
 
     // address vrfCoordinatorV2,
     // uint64 subscriptionId,
@@ -28,7 +31,7 @@ async function main() {
     console.log("Our Plot On Mars NFT address is:", marsToken.address);
     console.log("Deployer's account balance:", (await deployer.getBalance()).toString());
 
-    
+    //now we want to automate contract's verification
 
 }
 
