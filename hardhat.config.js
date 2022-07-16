@@ -10,6 +10,7 @@ require("@nomiclabs/hardhat-etherscan")
 const RINKEBY_RPC_URL = process.env.RINKEBY_RPC_URL
 const PRIVATE_KEY = process.env.PRIVATE_KEY
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY
+//const COINMARKETCAP = process.env.COINMARKETCAP
 
 module.exports = {
   defaultNetwork: "hardhat",
@@ -45,3 +46,13 @@ module.exports = {
     apiKey: ETHERSCAN_API_KEY,
   },
 }
+
+// if we want to know the gas fees for the functions called, we can run `npm install hardhat-gas-reporter
+// add `require("hardhat-gas-reporter")` here and add those parameters:
+// gasReporter: {
+//  enabled: true,
+//  outputFile: "gas-report.txt"
+//  noColors: true,
+//  currency: "USD",
+//  coinmarketcap: COINMARKETCAP
+//}
