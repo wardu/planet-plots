@@ -1,7 +1,7 @@
 //const path = require("path")
 
 const { networkConfig } = require("../helper-hardhat-config")
-const {network, ethers} = require("hardhat");
+const {network, ethers, run} = require("hardhat");
 
 
 const vrfCoordinatorV2 = networkConfig[chaindIf]["vrfCoordinatorV2"]
@@ -30,11 +30,30 @@ async function main() {
 
     console.log("Our Plot On Mars NFT address is:", marsToken.address);
     console.log("Deployer's account balance:", (await deployer.getBalance()).toString());
+    console.log(network.config)
+      if (network.config.chainId === 4 && process.env.ETHERSCAN_API_KEY) {
+        await marsToken.deployTransaction.wait(6) //make sure we give etherscan the time to process a tx
+        await verify(marsToken.address,[])
+      }
+  }
 
-    //now we want to automate contract's verification
-
+//now we want to automate contract's verification on etherscan
+// only if the network is NOT hardhat 
+async function verify(contractAddress, args) {
+  console.log("Verifying contract...")
+  try {
+    await run("verify:verify", {
+    address: contractAddress,
+    constructorArguments: args,
+    })
+  } catch (e) {
+    if (e.nessage.toLowerCase().includes("already verified")) {
+      console.log("Contract already verified, etherscan was faster than the verify()!")
+    } else {
+      console.log(e)
+    }
+  }
 }
-
 //return the asynchronous main function, throws error if problem
 main()
   .then(() => process.exit(0))
