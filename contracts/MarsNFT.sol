@@ -1,15 +1,15 @@
 //SPDX-License-Identifier: UNLICENSED
 
+/** @title A simple NFT contract
+@author Warren Dubery & Anne Chretien
+@notice This contract is going to allow users to mint an NFT representing a plot of land on Mars
+@notice There are only 10 unique NFTs available which price is set. First arrived,first served
+@dev This implements Chainlink VRF V2
+
+ */
+
 pragma solidity ^0.8.9;
 
-//This contract is going to allow users to mint an NFT representing 100sqm
-// of a plot of land on Mars. 
-//There are only 10 unique NFTs available which price is set. First arrived,first served
-//The minter won't know which plot they will get, but they will be told how many are left for sale
-//When we mint an NFT, we will trigger a Chainlink VRF Call to get a random number
-//This random number will be determining which plot will be sold
-//users have to pay to mint an NFT
-// the original owner of the land can withdraw the ETH sent to this contract
 
 import "../node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
@@ -39,18 +39,18 @@ contract MarsNFT is ERC721, Ownable, VRFConsumerBaseV2 {
     uint256 private i_nftFee;
     uint256 public s_tokenCounter;
     uint256 internal constant MAX_CHANCE_VALUE = 100;
-    string[] internal s_plotTokenUris;
-    bool private s_initialized;
+    //string[] internal s_plotTokenUris;
     uint256 private _tokenId; 
     mapping(address => uint256) private _ownerToId; //link each NFT to their owner
     
     //throws if the address minting the NFT does not send the correct nftFee
     error NeedMoreEth(); 
+    error Mint_Failed();
     
     //will emit to inform of the request and index the id and address
     event NftRequested(uint256 indexed requestId);
 
-    enum NFTCollection {nft1, nft2, nft3, nft4, nft5, nft16, nft17, nft18, nft19, nft10 }
+    uint256[10] NFTCollection; // index of each nft.. should it be an enum?
 
 
     constructor(
@@ -87,6 +87,11 @@ contract MarsNFT is ERC721, Ownable, VRFConsumerBaseV2 {
         //enum size plots/NFT = 10
         // randomNumber % 10 will give us a number between 0 and 9
         // which will be used to select the index of the NFT within the enum
+        //then the _mint() can be called 
+
+        // if (!success) {
+        //     revert Mint_Failed();
+        // }
     }
 
     function setMintFee(uint256 newMintFee) private onlyOwner returns(uint256){
