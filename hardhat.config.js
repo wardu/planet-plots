@@ -1,14 +1,15 @@
 require("@nomicfoundation/hardhat-toolbox")
 require("dotenv").config()
-require("hardhat-etherscan")
+require("@nomiclabs/hardhat-etherscan")
 // The next line is part of the sample project, you don't need it in your
 // project. It imports a Hardhat task definition, that can be used for
 // testing the frontend.
-require("./tasks/faucet")
+// require("./tasks/faucet")
 
 /** @type import('hardhat/config').HardhatUserConfig */
 const RINKEBY_RPC_URL = process.env.RINKEBY_RPC_URL
-const PRIVATE_KEY = process.env.PRIVATE_KEY    
+const PRIVATE_KEY = process.env.PRIVATE_KEY
+const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY
 
 module.exports = {
   defaultNetwork: "hardhat",
@@ -39,5 +40,8 @@ module.exports = {
           version: "0.6.0",
         },
     ],
-  }
+  },
+  etherscan: {
+    apiKey: ETHERSCAN_API_KEY,
+  },
 }
