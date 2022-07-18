@@ -1,4 +1,6 @@
+require("@nomiclabs/hardhat-ethers")
 require("@nomicfoundation/hardhat-toolbox")
+require('hardhat-deploy')
 require("dotenv").config()
 require("@nomiclabs/hardhat-etherscan")
 // The next line is part of the sample project, you don't need it in your
@@ -28,18 +30,10 @@ module.exports = {
 },
   solidity: {
     compilers: [
-        {
-            version: "0.8.9",
-        },
-        {
-          version: "0.8.0",
-        },
-        {
-          version: "0.6.6",
-        },
-        {
-          version: "0.6.0",
-        },
+        {version: "0.8.9"},
+        {version: "0.8.0"},
+        {version: "0.6.6"},
+        {version: "0.6.0"},
     ],
   },
   etherscan: {

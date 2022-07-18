@@ -10,18 +10,20 @@
 const { networkConfig, developmentChains } = require("../helper-hardhat-config")
 const { network, chainId } = require("hardhat")
 
+const BASE_FEE = ethers.utils.parseEther("0.25") // premium fee per request
+const GAS_PRICE_LINK = 1e9 // 1000000000 link per gas, calculated based on the value of gas
 
 module.exports = async ({ getNamedAccounts, deployments }) => {
   const { deploy, log } = deployments
   const { deployer } = await getNamedAccounts()
   const chainId = network.config.chainId
-  if (developmentChains.includes(chaindId)) {
+
+  if (chainId == 1337) {
     log("You are using hardhat's network, you need Mocks. Deploying them for you...")
     await deploy("VRFCoordinatorV2Mock", {
-      contract:"VRFCoordinatorV2Mock",
       from: deployer,
       log: true,
-      args: [],
+      args: [BASE_FEE, GAS_PRICE_LINK],
     })
     log("Mocks Deployed!")
     log("---------------------------------------------")
@@ -29,5 +31,6 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     log("Please run `npx hardhat console --network localhost` to interact with the deployed smart contracts!")
     log("---------------------------------------------")
   }
-
 }
+
+module.exports.tags = ["all", "mocks"]
