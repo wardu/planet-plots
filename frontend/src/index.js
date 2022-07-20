@@ -1,16 +1,20 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { Dapp } from "./components/Dapp";
+import React from "react"
+import ReactDOM from "react-dom"
+import { Dapp } from "./components/Dapp"
+import "bootstrap/dist/css/bootstrap.css"
 
-// We import bootstrap here, but you can remove if you want
-import "bootstrap/dist/css/bootstrap.css";
+const marsBackground = require("./mars.jpg")
 
-// This is the entry point of your application, but it just renders the Dapp
-// react component. All of the logic is contained in it.
+const myStyle = {
+    backgroundImage: `url(${marsBackground})`,
+    height: "100vh",
+}
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Dapp />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+    <React.StrictMode>
+        <div style={myStyle}>
+            <Dapp />
+        </div>
+    </React.StrictMode>,
+    document.getElementById("root")
+)
