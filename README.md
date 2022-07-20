@@ -21,6 +21,10 @@ Each NFT represents an ownership certificate of a 10m * 10m plot of land on Mars
 <br />
 <br />
 
+![dapp](https://user-images.githubusercontent.com/28829008/180002396-42450924-d2ef-4d4f-92cf-aa6af9c1b823.gif)
+
+<br />
+
 ## Hardhat Boilerplate
 
 More information can be found in Hardhat's boilerplate README: https://github.com/NomicFoundation/hardhat-boilerplate
