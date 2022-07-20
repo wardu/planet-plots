@@ -13,7 +13,7 @@ export function ConnectWallet({ connectWallet, networkError, dismiss }) {
                     )}
                 </div>
                 <div className="col-6 p-4 text-center">
-                    <p>Please connect to Metamask</p>
+                    <p style={{ color: "white" }}>Please connect to Metamask</p>
                     <button className="btn btn-info btn-lg" type="button" onClick={connectWallet}>
                         Connect Wallet
                     </button>
