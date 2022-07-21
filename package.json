@@ -1,5 +1,6 @@
 {
   "name": "hardhat-boilerplate",
+  "type": "commonjs",
   "version": "1.0.0",
   "description": "A boilerplate repository to get you started with Hardhat and Ethereum development",
   "scripts": {
@@ -19,13 +20,19 @@
   },
   "homepage": "https://github.com/NomicFoundation/hardhat-boilerplate#readme",
   "devDependencies": {
-    "@nomicfoundation/hardhat-toolbox": "^1.0.2"
+    "@nomiclabs/hardhat-etherscan": "^3.1.0",
+    "@nomiclabs/hardhat-waffle": "^2.0.3",
+    "@nomiclabs/hardhat-ethers": "^2.1.0",
+    "chai": "^4.3.6",
+    "hardhat-network-helpers": "^0.0.1",
+    "mocha": "^10.0.0"
   },
   "dependencies": {
     "@chainlink/contracts": "^0.4.1",
-    "@nomiclabs/hardhat-etherscan": "^3.1.0",
     "@openzeppelin/contracts": "^4.7.0",
     "dotenv": "^16.0.1",
+    "fs": "^0.0.1-security",
+    "hardhat-gas-reporter": "^1.0.8",
     "prettier": "^2.7.1",
     "prettier-plugin-solidity": "^1.0.0-dev.23"
   }

@@ -1,4 +1,4 @@
-require("@nomicfoundation/hardhat-toolbox")
+require("@nomiclabs/hardhat-waffle")
 require("dotenv").config()
 require("@nomiclabs/hardhat-etherscan")
 // The next line is part of the sample project, you don't need it in your
@@ -18,6 +18,7 @@ module.exports = {
     hardhat: {
         chainId: 1337,
         // gasPrice: 130000000000,
+        
     },
     rinkeby: {
         url: RINKEBY_RPC_URL,

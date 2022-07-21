@@ -2,10 +2,9 @@
 // we can't have these functions in our `helper-hardhat-config`
 // since these use the hardhat library
 // and it would be a circular dependency
-const { run, network } = require("hardhat")
-const { networkConfig } = require("../helper-hardhat-config")
+const { run } = require("hardhat")
 
-export async function verify(contractAddress, args) {
+async function verify(contractAddress, args) {
     console.log("Verifying contract...")
     try {
         await run("verify:verify", {
@@ -20,3 +19,5 @@ export async function verify(contractAddress, args) {
         }
     }
 }
+
+module.exports={ verify }
