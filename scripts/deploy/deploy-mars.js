@@ -54,7 +54,7 @@ async function main() {
 
     //then we deploy the contract
     const marsFactory = await ethers.getContractFactory("MarsNFT")
-    const marsToken = await marsFactory.deploy("RandomIpfsNft", {
+    const marsToken = await marsFactory.deploy("MarsNFT", {
         from: deployer,
         args: args,
         log: true,
@@ -66,7 +66,7 @@ async function main() {
     console.log("Deployer's account balance is now:", (await deployer.getBalance()).toString())
 
     console.log(network.config)
-    if (network.config.chainId === 4 && process.env.ETHERSCAN_API_KEY) {
+    if (chainId === 4 && process.env.ETHERSCAN_API_KEY) {
         await marsToken.deployTransaction.wait(6) //make sure we give etherscan the time to process a tx
         await verify(marsToken.address, [])
     }
