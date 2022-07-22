@@ -1,6 +1,6 @@
 //const path = require("path")
 
-const { networkConfig } = require("../../helper-hardhat.config.js")
+const { networkConfig } = require("../../helper-hardhat-config.js")
 const { network, ethers } = require("hardhat")
 const verify = require("../utils/verify")
 require("dotenv").config()
@@ -57,24 +57,25 @@ async function main() {
 
     //then we deploy the contract
     const marsFactory = await ethers.getContractFactory("MarsNFT")
-    const marsToken = await marsFactory.deploy("MarsNFT", {
-        from: deployer,
-        args: args,
-        log: true,
-        waitConfirmations: network.config.blockConfirmations || 1,
-    })
+    const marsToken = await marsFactory.deploy(
+        vrfCoordinatorV2Address,
+        subscriptionId,
+        networkConfig[chainId].gasLane,
+        networkConfig[chainId].mintFee,
+        networkConfig[chainId].callbackGasLimit
+    )
 
     await marsToken.deployed()
 
-    console.log("Our Plot On Mars NFT address is:", marsToken.address)
+    console.log("Your Plot On Mars NFT address is:", marsToken.address)
     console.log("Deployer's account balance is now:", (await deployer.getBalance()).toString())
 
     console.log(network.config)
     if (chainId === 4 && process.env.ETHERSCAN_API_KEY) {
         await marsToken.deployTransaction.wait(6) //make sure we give etherscan the time to process a tx
         await verify(marsToken.address, [])
+        console.log("Your contract has been verified on etherscan")
     }
-    console.log("Your contract has been verified on etherscan")
 }
 //return the asynchronous main function, throws error if problem
 main()
