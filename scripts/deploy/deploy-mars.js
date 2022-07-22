@@ -20,34 +20,37 @@ async function main() {
 
     // then get the mock if we are on hardhat, otherwise get the subscriptionId and contract's address from
     if (chainId === 1337) {
-        console.warn("You are using hardhat's network, you need Mocks. Deploying them for you...");
-        const VRF = await ethers.getContractFactory("VRFCoordinatorV2Mock");
-        const MockCoordinator = await VRF.deploy(BASE_FEE,GAS_PRICE_LINK);
-        await MockCoordinator.deployed();
-        console.log("Mocks Deployed!");
-        console.log("---------------------------------------------");
-        console.log("You are deploying to a local network, you'll need a local network running to interact");
-        console.log("Please run `npx hardhat console --network localhost` to interact with the deployed smart contracts!");
-        console.log("---------------------------------------------");
-        
+        console.warn("You are using hardhat's network, you need Mocks. Deploying them for you...")
+        const VRF = await ethers.getContractFactory("VRFCoordinatorV2Mock")
+        const MockCoordinator = await VRF.deploy(BASE_FEE, GAS_PRICE_LINK)
+        await MockCoordinator.deployed()
+        console.log("Mocks Deployed!")
+        console.log("---------------------------------------------")
+        console.log(
+            "You are deploying to a local network, you'll need a local network running to interact"
+        )
+        console.log(
+            "Please run `npx hardhat console --network localhost` to interact with the deployed smart contracts!"
+        )
+        console.log("---------------------------------------------")
+
         vrfCoordinatorV2Address = MockCoordinator.address
         console.log(vrfCoordinatorV2Address)
-
 
         const tx = await MockCoordinator.createSubscription()
         const txReceipt = await tx.wait(1)
         subscriptionId = txReceipt.events[0].args.subId
         await MockCoordinator.fundSubscription(subscriptionId, FUND_AMOUNT)
         console.log("Mocks funded")
-      } else {
+    } else {
         vrfCoordinatorV2Address = networkConfig[chainId].vrfCoordinatorV2
         subscriptionId = networkConfig[chainId].subscriptionId
     }
 
     const args = [
-        vrfCoordinatorV2Address, 
-        subscriptionId, 
-        networkConfig[chainId].gasLane, 
+        vrfCoordinatorV2Address,
+        subscriptionId,
+        networkConfig[chainId].gasLane,
         networkConfig[chainId].mintFee,
         networkConfig[chainId].callbackGasLimit,
     ]
@@ -58,7 +61,8 @@ async function main() {
         from: deployer,
         args: args,
         log: true,
-        waitConfirmations: network.config.blockConfirmations || 1,})
+        waitConfirmations: network.config.blockConfirmations || 1,
+    })
 
     await marsToken.deployed()
 
