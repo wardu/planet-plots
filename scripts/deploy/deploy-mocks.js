@@ -13,7 +13,7 @@ const { network } = require("hardhat")
 const BASE_FEE = ethers.utils.parseEther("0.25") // premium fee per request
 const GAS_PRICE_LINK = 1e9 // 1000000000 link per gas, calculated based on the value of gas
 
-async function main () {
+module.exports = async function main () {
 
   const [deployer] = await ethers.getSigners();
   console.log(
@@ -23,10 +23,13 @@ async function main () {
 
   if (network.name === "hardhat") {
     console.warn("You are using hardhat's network, you need Mocks. Deploying them for you...");
+    
     const VRF = await ethers.getContractFactory("VRFCoordinatorV2Mock");
     const MockCoordinator = await VRF.deploy(BASE_FEE,GAS_PRICE_LINK);
     await MockCoordinator.deployed();
+    
     console.log("Mocks Deployed!");
+    console.log("Mocks' address:", MockCoordinator.address);
     console.log("---------------------------------------------");
     console.log("You are deploying to a local network, you'll need a local network running to interact");
     console.log("Please run `npx hardhat console --network localhost` to interact with the deployed smart contracts!");
@@ -34,9 +37,9 @@ async function main () {
   }
 }
 
-main()
-  .then(() => process.exit(0))
-  .catch((error) => {
-    console.error(error);
-    process.exit(1);
-  });
+// main()
+//   .then(() => process.exit(0))
+//   .catch((error) => {
+//     console.error(error);
+//     process.exit(1);
+//   });
